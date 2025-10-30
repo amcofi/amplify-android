@@ -112,8 +112,17 @@ public final class AWSS3StorageUploadRequest<L> {
             @Nullable Map<String, String> metadata,
             boolean useAccelerateEndpoint
     ) {
-        this(key, local, accessLevel, targetIdentityId, contentType, serverSideEncryption, metadata, 
-             useAccelerateEndpoint, null);
+        this(
+            key,
+            local,
+            accessLevel,
+            targetIdentityId,
+            contentType,
+            serverSideEncryption,
+            metadata,
+            useAccelerateEndpoint,
+            null
+        );
     }
 
     /**
