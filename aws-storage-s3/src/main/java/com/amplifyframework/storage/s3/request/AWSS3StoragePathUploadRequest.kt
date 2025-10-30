@@ -14,6 +14,7 @@
  */
 package com.amplifyframework.storage.s3.request
 
+import aws.sdk.kotlin.services.s3.model.StorageClass
 import com.amplifyframework.storage.StoragePath
 import com.amplifyframework.storage.s3.ServerSideEncryption
 
@@ -27,5 +28,6 @@ internal data class AWSS3StoragePathUploadRequest<L>(
     val contentType: String?,
     val serverSideEncryption: ServerSideEncryption,
     val metadata: Map<String, String>,
-    val useAccelerateEndpoint: Boolean
+    val useAccelerateEndpoint: Boolean,
+    val storageClass: StorageClass?
 )

@@ -16,8 +16,10 @@
 package com.amplifyframework.storage.s3.options;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.ObjectsCompat;
 
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 import com.amplifyframework.storage.options.StorageUploadFileOptions;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
 
@@ -29,11 +31,13 @@ import java.util.Objects;
 public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOptions {
     private final ServerSideEncryption serverSideEncryption;
     private final boolean useAccelerationMode;
+    private final StorageClass storageClass;
 
     private AWSS3StorageUploadFileOptions(final Builder builder) {
         super(builder);
         this.serverSideEncryption = builder.getServerSideEncryption();
         this.useAccelerationMode = builder.useAccelerateEndpoint;
+        this.storageClass = builder.storageClass;
     }
 
     /**
@@ -43,6 +47,15 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
     @NonNull
     public ServerSideEncryption getServerSideEncryption() {
         return serverSideEncryption;
+    }
+
+    /**
+     * S3 storage class for the uploaded object.
+     * @return S3 storage class, or null if not specified
+     */
+    @Nullable
+    public StorageClass getStorageClass() {
+        return storageClass;
     }
 
     /**
@@ -76,7 +89,8 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
                 .contentType(options.getContentType())
                 .serverSideEncryption(options.getServerSideEncryption())
                 .metadata(options.getMetadata())
-                .bucket(options.getBucket());
+                .bucket(options.getBucket())
+                .storageClass(options.getStorageClass());
     }
 
     /**
@@ -111,7 +125,8 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
                     ObjectsCompat.equals(getContentType(), that.getContentType()) &&
                     ObjectsCompat.equals(getServerSideEncryption(), that.getServerSideEncryption()) &&
                     ObjectsCompat.equals(getMetadata(), that.getMetadata()) &&
-                    ObjectsCompat.equals(getBucket(), that.getBucket());
+                    ObjectsCompat.equals(getBucket(), that.getBucket()) &&
+                    ObjectsCompat.equals(getStorageClass(), that.getStorageClass());
         }
     }
 
@@ -124,7 +139,8 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
                 getContentType(),
                 getServerSideEncryption(),
                 getMetadata(),
-                getBucket()
+                getBucket(),
+                getStorageClass()
         );
     }
 
@@ -139,6 +155,7 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
                 ", serverSideEncryption=" + getServerSideEncryption().getName() +
                 ", metadata=" + getMetadata() +
                 ", bucket=" + getBucket() +
+                ", storageClass=" + getStorageClass() +
                 '}';
     }
 
@@ -150,6 +167,7 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
     public static final class Builder extends StorageUploadFileOptions.Builder<Builder> {
         private ServerSideEncryption serverSideEncryption;
         private boolean useAccelerateEndpoint;
+        private StorageClass storageClass;
 
         private Builder() {
             super();
@@ -174,6 +192,17 @@ public final class AWSS3StorageUploadFileOptions extends StorageUploadFileOption
         @NonNull
         public Builder serverSideEncryption(@NonNull ServerSideEncryption serverSideEncryption) {
             this.serverSideEncryption = Objects.requireNonNull(serverSideEncryption);
+            return this;
+        }
+
+        /**
+         * Configures the S3 storage class for a new AWSS3StorageUploadFileOptions instance.
+         * @param storageClass S3 storage class (e.g., StorageClass.GlacierIr)
+         * @return Current Builder instance for fluent chaining
+         */
+        @NonNull
+        public Builder storageClass(@Nullable StorageClass storageClass) {
+            this.storageClass = storageClass;
             return this;
         }
 
