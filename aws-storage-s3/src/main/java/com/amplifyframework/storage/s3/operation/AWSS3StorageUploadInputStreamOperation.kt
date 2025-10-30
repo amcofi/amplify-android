@@ -14,6 +14,7 @@
  */
 package com.amplifyframework.storage.s3.operation
 
+import aws.sdk.kotlin.services.s3.model.StorageClass
 import com.amplifyframework.auth.AuthCredentialsProvider
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.Consumer
@@ -116,6 +117,7 @@ class AWSS3StorageUploadInputStreamOperation @JvmOverloads internal constructor(
                                 objectMetadata.metaData[ObjectMetadata.SERVER_SIDE_ENCRYPTION] =
                                     storageServerSideEncryption.getName()
                             }
+                            objectMetadata.metaData[ObjectMetadata.STORAGE_CLASS] = StorageClass.GlacierIr.value
                             transferObserver = storageService.uploadInputStream(
                                 transferId,
                                 serviceKey,
