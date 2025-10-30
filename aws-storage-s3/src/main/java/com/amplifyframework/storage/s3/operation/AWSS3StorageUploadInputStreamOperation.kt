@@ -117,8 +117,8 @@ class AWSS3StorageUploadInputStreamOperation @JvmOverloads internal constructor(
                                 objectMetadata.metaData[ObjectMetadata.SERVER_SIDE_ENCRYPTION] =
                                     storageServerSideEncryption.getName()
                             }
-                            // Use storage class from request, or default to GlacierIr
-                            val storageClass = uploadRequest.storageClass ?: StorageClass.GlacierIr
+                            // Use storage class from request, or default to Standard
+                            val storageClass = uploadRequest.storageClass ?: StorageClass.Standard
                             objectMetadata.metaData[ObjectMetadata.STORAGE_CLASS] = storageClass.value
                             transferObserver = storageService.uploadInputStream(
                                 transferId,
