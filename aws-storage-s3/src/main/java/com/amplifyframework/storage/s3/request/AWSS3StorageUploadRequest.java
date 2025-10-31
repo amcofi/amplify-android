@@ -18,6 +18,7 @@ package com.amplifyframework.storage.s3.request;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 import com.amplifyframework.storage.StorageAccessLevel;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
 
@@ -41,6 +42,49 @@ public final class AWSS3StorageUploadRequest<L> {
     private final ServerSideEncryption serverSideEncryption;
     private final Map<String, String> metadata;
     private final boolean useAccelerateEndpoint;
+    private final StorageClass storageClass;
+
+    /**
+     * Constructs a new AWSS3StorageUploadRequest.
+     * Although this has public access, it is intended for internal use and should not be used directly by host
+     * applications. The behavior of this may change without warning.
+     *
+     * @param key key for item to upload
+     * @param local object to upload (e.g. File or InputStream)
+     * @param accessLevel Storage access level
+     * @param targetIdentityId If set, this should override the current user's identity ID.
+     *                         If null, the operation will fetch the current identity ID.
+     * @param contentType The standard MIME type describing the format of the object to store
+     * @param serverSideEncryption server side encryption type for the current storage bucket
+     * @param metadata Metadata for the object to store
+     * @param useAccelerateEndpoint flag to use acceleration endpoint.
+     * @param storageClass S3 storage class for the uploaded object
+     */
+    @SuppressWarnings("deprecation")
+    public AWSS3StorageUploadRequest(
+            @NonNull String key,
+            @NonNull L local,
+            @NonNull StorageAccessLevel accessLevel,
+            @Nullable String targetIdentityId,
+            @Nullable String contentType,
+            @NonNull ServerSideEncryption serverSideEncryption,
+            @Nullable Map<String, String> metadata,
+            boolean useAccelerateEndpoint,
+            @Nullable StorageClass storageClass
+    ) {
+        this.key = key;
+        this.local = local;
+        this.accessLevel = accessLevel;
+        this.targetIdentityId = targetIdentityId;
+        this.contentType = contentType;
+        this.serverSideEncryption = serverSideEncryption;
+        this.metadata = new HashMap<>();
+        if (metadata != null) {
+            this.metadata.putAll(metadata);
+        }
+        this.useAccelerateEndpoint = useAccelerateEndpoint;
+        this.storageClass = storageClass;
+    }
 
     /**
      * Constructs a new AWSS3StorageUploadRequest.
@@ -68,17 +112,17 @@ public final class AWSS3StorageUploadRequest<L> {
             @Nullable Map<String, String> metadata,
             boolean useAccelerateEndpoint
     ) {
-        this.key = key;
-        this.local = local;
-        this.accessLevel = accessLevel;
-        this.targetIdentityId = targetIdentityId;
-        this.contentType = contentType;
-        this.serverSideEncryption = serverSideEncryption;
-        this.metadata = new HashMap<>();
-        if (metadata != null) {
-            this.metadata.putAll(metadata);
-        }
-        this.useAccelerateEndpoint = useAccelerateEndpoint;
+        this(
+            key,
+            local,
+            accessLevel,
+            targetIdentityId,
+            contentType,
+            serverSideEncryption,
+            metadata,
+            useAccelerateEndpoint,
+            null
+        );
     }
 
     /**
@@ -152,6 +196,15 @@ public final class AWSS3StorageUploadRequest<L> {
      */
     public boolean useAccelerateEndpoint() {
         return useAccelerateEndpoint;
+    }
+
+    /**
+     * Gets the S3 storage class.
+     * @return S3 storage class, or null if not specified
+     */
+    @Nullable
+    public StorageClass getStorageClass() {
+        return storageClass;
     }
 }
 
