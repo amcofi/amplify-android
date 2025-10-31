@@ -29,5 +29,5 @@ internal data class AWSS3StoragePathUploadRequest<L>(
     val serverSideEncryption: ServerSideEncryption,
     val metadata: Map<String, String>,
     val useAccelerateEndpoint: Boolean,
-    val storageClass: StorageClass?
+    val storageClass: StorageClass? = null
 )
