@@ -18,9 +18,10 @@ package com.amplifyframework.storage.s3.request;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import aws.sdk.kotlin.services.s3.model.StorageClass;
 import com.amplifyframework.storage.StorageAccessLevel;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
+
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +61,7 @@ public final class AWSS3StorageUploadRequest<L> {
      * @param useAccelerateEndpoint flag to use acceleration endpoint.
      * @param storageClass S3 storage class for the uploaded object
      */
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "checkstyle:parameternumber"})
     public AWSS3StorageUploadRequest(
             @NonNull String key,
             @NonNull L local,

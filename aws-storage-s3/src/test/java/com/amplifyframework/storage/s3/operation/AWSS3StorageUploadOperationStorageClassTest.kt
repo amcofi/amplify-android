@@ -142,10 +142,10 @@ class AWSS3StorageUploadOperationStorageClassTest {
     fun `AWSS3StoragePathUploadFileOperation supports different storage classes`() {
         // Test Glacier
         testStorageClassInUploadFileOperation(StorageClass.Glacier)
-        
+
         // Test Deep Archive
         testStorageClassInUploadFileOperation(StorageClass.DeepArchive)
-        
+
         // Test Intelligent Tiering
         testStorageClassInUploadFileOperation(StorageClass.IntelligentTiering)
     }
@@ -344,13 +344,13 @@ class AWSS3StorageUploadOperationStorageClassTest {
             )
         }
         val capturedMetadata = metadataSlot.captured
-        
+
         // Verify storage class is set
         assertEquals(
             StorageClass.GlacierIr.value,
             capturedMetadata.metaData[ObjectMetadata.STORAGE_CLASS]
         )
-        
+
         // Verify other metadata is also set
         assertEquals("text/plain", capturedMetadata.metaData[ObjectMetadata.CONTENT_TYPE])
         assertEquals(

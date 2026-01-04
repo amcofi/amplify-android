@@ -19,9 +19,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.ObjectsCompat;
 
-import aws.sdk.kotlin.services.s3.model.StorageClass;
 import com.amplifyframework.storage.options.StorageUploadInputStreamOptions;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
+
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 
 import java.util.Objects;
 

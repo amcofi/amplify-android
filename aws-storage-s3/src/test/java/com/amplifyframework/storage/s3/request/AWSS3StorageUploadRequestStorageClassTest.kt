@@ -151,7 +151,7 @@ class AWSS3StorageUploadRequestStorageClassTest {
         assertEquals(ServerSideEncryption.NONE, request.serverSideEncryption)
         assertEquals(metadata, request.metadata)
         assertEquals(false, request.useAccelerateEndpoint())
-        
+
         // Storage class should be null by default
         assertNull(request.storageClass)
     }
