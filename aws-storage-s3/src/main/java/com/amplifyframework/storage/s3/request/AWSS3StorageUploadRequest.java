@@ -21,10 +21,10 @@ import androidx.annotation.Nullable;
 import com.amplifyframework.storage.StorageAccessLevel;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
 
-import aws.sdk.kotlin.services.s3.model.StorageClass;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 
 /**
  * Parameters to provide to S3 that describe a request to upload.

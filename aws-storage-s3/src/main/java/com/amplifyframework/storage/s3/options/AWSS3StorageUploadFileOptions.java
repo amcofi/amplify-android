@@ -22,9 +22,9 @@ import androidx.core.util.ObjectsCompat;
 import com.amplifyframework.storage.options.StorageUploadFileOptions;
 import com.amplifyframework.storage.s3.ServerSideEncryption;
 
-import aws.sdk.kotlin.services.s3.model.StorageClass;
-
 import java.util.Objects;
+
+import aws.sdk.kotlin.services.s3.model.StorageClass;
 
 /**
  * Options to specify attributes of object upload operation to an AWS S3 bucket.
