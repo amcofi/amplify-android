@@ -74,7 +74,7 @@ class AWSS3StorageUploadOptionsStorageClassTest {
         val originalOptions = AWSS3StorageUploadFileOptions.builder()
             .contentType("image/jpeg")
             .storageClass(StorageClass.GlacierIr)
-            .serverSideEncryption(ServerSideEncryption.AES256)
+            .serverSideEncryption(ServerSideEncryption.MANAGED_KEYS)
             .build()
 
         // WHEN
@@ -84,7 +84,7 @@ class AWSS3StorageUploadOptionsStorageClassTest {
         // THEN
         assertEquals(StorageClass.GlacierIr, copiedOptions.storageClass)
         assertEquals("image/jpeg", copiedOptions.contentType)
-        assertEquals(ServerSideEncryption.AES256, copiedOptions.serverSideEncryption)
+        assertEquals(ServerSideEncryption.MANAGED_KEYS, copiedOptions.serverSideEncryption)
     }
 
     @Test

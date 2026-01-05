@@ -196,7 +196,7 @@ class AWSS3StorageUploadOperationStorageClassTest {
         // GIVEN
         val path = StoragePath.fromString("public/data.json")
         val inputStream = File.createTempFile("data", ".json").inputStream()
-        val request = AWSS3StoragePathUploadRequest(
+        val request = AWSS3StoragePathUploadRequest<InputStream>(
             path,
             inputStream,
             "application/json",
@@ -241,7 +241,7 @@ class AWSS3StorageUploadOperationStorageClassTest {
         // GIVEN
         val path = StoragePath.fromString("public/data.json")
         val inputStream = File.createTempFile("data", ".json").inputStream()
-        val request = AWSS3StoragePathUploadRequest(
+        val request = AWSS3StoragePathUploadRequest<InputStream>(
             path,
             inputStream,
             "application/json",
@@ -313,7 +313,7 @@ class AWSS3StorageUploadOperationStorageClassTest {
             path,
             tempFile,
             "text/plain",
-            ServerSideEncryption.AES256,
+            ServerSideEncryption.MANAGED_KEYS,
             customMetadata,
             false,
             StorageClass.GlacierIr
@@ -354,7 +354,7 @@ class AWSS3StorageUploadOperationStorageClassTest {
         // Verify other metadata is also set
         assertEquals("text/plain", capturedMetadata.metaData[ObjectMetadata.CONTENT_TYPE])
         assertEquals(
-            ServerSideEncryption.AES256.getName(),
+            ServerSideEncryption.MANAGED_KEYS.getName(),
             capturedMetadata.metaData[ObjectMetadata.SERVER_SIDE_ENCRYPTION]
         )
         assertEquals(customMetadata, capturedMetadata.userMetadata)

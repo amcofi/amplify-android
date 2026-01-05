@@ -92,7 +92,7 @@ class AWSS3StorageUploadRequestStorageClassTest {
             StorageAccessLevel.PROTECTED,
             "user123",
             "application/json",
-            ServerSideEncryption.AES256,
+            ServerSideEncryption.MANAGED_KEYS,
             mapOf("custom" to "metadata"),
             true,
             StorageClass.Glacier
@@ -110,7 +110,7 @@ class AWSS3StorageUploadRequestStorageClassTest {
             StorageAccessLevel.PRIVATE,
             "user-456",
             "application/octet-stream",
-            ServerSideEncryption.AES256,
+            ServerSideEncryption.MANAGED_KEYS,
             metadata,
             true,
             StorageClass.DeepArchive
@@ -121,7 +121,7 @@ class AWSS3StorageUploadRequestStorageClassTest {
         assertEquals(StorageAccessLevel.PRIVATE, request.accessLevel)
         assertEquals("user-456", request.targetIdentityId)
         assertEquals("application/octet-stream", request.contentType)
-        assertEquals(ServerSideEncryption.AES256, request.serverSideEncryption)
+        assertEquals(ServerSideEncryption.MANAGED_KEYS, request.serverSideEncryption)
         assertEquals(metadata, request.metadata)
         assertEquals(true, request.useAccelerateEndpoint())
         assertEquals(StorageClass.DeepArchive, request.storageClass)
