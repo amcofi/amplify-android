@@ -29,6 +29,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
 import java.io.File
+import java.io.InputStream
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
