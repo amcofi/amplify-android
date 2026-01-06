@@ -14,6 +14,7 @@
  */
 package com.amplifyframework.storage.s3.operation
 
+import aws.sdk.kotlin.services.s3.model.StorageClass
 import com.amplifyframework.auth.AuthCredentialsProvider
 import com.amplifyframework.core.Amplify
 import com.amplifyframework.core.Consumer
@@ -111,6 +112,9 @@ internal class AWSS3StoragePathUploadFileOperation internal constructor(
                     objectMetadata.metaData[ObjectMetadata.SERVER_SIDE_ENCRYPTION] =
                         storageServerSideEncryption.getName()
                 }
+                // Use storage class from request, or default to Standard
+                val storageClass = uploadRequest.storageClass ?: StorageClass.Standard
+                objectMetadata.metaData[ObjectMetadata.STORAGE_CLASS] = storageClass.value
                 transferObserver = storageService.uploadFile(
                     transferId,
                     serviceKey,

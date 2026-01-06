@@ -636,7 +636,10 @@ public final class AWSS3StoragePlugin extends StoragePlugin<S3Client> {
                 ? ((AWSS3StorageUploadFileOptions) options).getServerSideEncryption()
                 : ServerSideEncryption.NONE,
             options.getMetadata(),
-            useAccelerateEndpoint
+            useAccelerateEndpoint,
+            options instanceof AWSS3StorageUploadFileOptions
+                ? ((AWSS3StorageUploadFileOptions) options).getStorageClass()
+                : null
         );
 
         GetStorageServiceResult result = getStorageServiceResult(options.getBucket());
@@ -677,7 +680,10 @@ public final class AWSS3StoragePlugin extends StoragePlugin<S3Client> {
                         ? ((AWSS3StorageUploadFileOptions) options).getServerSideEncryption()
                         : ServerSideEncryption.NONE,
                 options.getMetadata(),
-                useAccelerateEndpoint
+                useAccelerateEndpoint,
+                options instanceof AWSS3StorageUploadFileOptions
+                        ? ((AWSS3StorageUploadFileOptions) options).getStorageClass()
+                        : null
         );
 
         GetStorageServiceResult result = getStorageServiceResult(options.getBucket());
@@ -770,7 +776,10 @@ public final class AWSS3StoragePlugin extends StoragePlugin<S3Client> {
                 ? ((AWSS3StorageUploadInputStreamOptions) options).getServerSideEncryption()
                 : ServerSideEncryption.NONE,
             options.getMetadata(),
-            useAccelerateEndpoint
+            useAccelerateEndpoint,
+            options instanceof AWSS3StorageUploadInputStreamOptions
+                ? ((AWSS3StorageUploadInputStreamOptions) options).getStorageClass()
+                : null
         );
 
         GetStorageServiceResult result = getStorageServiceResult(options.getBucket());
@@ -811,7 +820,10 @@ public final class AWSS3StoragePlugin extends StoragePlugin<S3Client> {
                         ? ((AWSS3StorageUploadInputStreamOptions) options).getServerSideEncryption()
                         : ServerSideEncryption.NONE,
                 options.getMetadata(),
-                useAccelerateEndpoint
+                useAccelerateEndpoint,
+                options instanceof AWSS3StorageUploadInputStreamOptions
+                        ? ((AWSS3StorageUploadInputStreamOptions) options).getStorageClass()
+                        : null
         );
 
         GetStorageServiceResult result = getStorageServiceResult(options.getBucket());
